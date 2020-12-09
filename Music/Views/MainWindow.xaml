@@ -1,0 +1,35 @@
+﻿<Window x:Class="Music.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Music.Views"
+        mc:Ignorable="d"
+        Title="Music" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <Image Name="img"  Source="C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\Resources\default.png"
+                   Height="100"
+                   Width="100"/>
+            <ListBox x:Name="lbAlbums"
+                     ItemsSource="{Binding Albums}"
+                     SelectedItem="{Binding SelectedAlbum}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Key}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox x:Name="lbArtists"
+                     ItemsSource="{Binding Artists}"
+                     SelectedItem="{Binding SelectedArtist}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Key}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>

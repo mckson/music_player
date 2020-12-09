@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Playlists xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlaylistsCollection>
+    <Playlist>
+      <SongsAudio>
+        <base64Binary>oXyapUz/tlKB3KRcmDOJuJMN3rM=</base64Binary>
+        <base64Binary>KyzVoZ4r9G8O8YBqBrnvm4+0npk=</base64Binary>
+        <base64Binary>tN6YNSytzv/3iHNCNYjNb0e6AYU=</base64Binary>
+        <base64Binary>f0AHz46nx5aC8v2/LFzTF02+6D4=</base64Binary>
+      </SongsAudio>
+      <Title>My Another Playlist</Title>
+    </Playlist>
+  </PlaylistsCollection>
+  <SelectedPlaylist>
+    <SongsAudio>
+      <base64Binary>oXyapUz/tlKB3KRcmDOJuJMN3rM=</base64Binary>
+      <base64Binary>KyzVoZ4r9G8O8YBqBrnvm4+0npk=</base64Binary>
+      <base64Binary>tN6YNSytzv/3iHNCNYjNb0e6AYU=</base64Binary>
+      <base64Binary>f0AHz46nx5aC8v2/LFzTF02+6D4=</base64Binary>
+    </SongsAudio>
+    <Title>My Another Playlist</Title>
+  </SelectedPlaylist>
+  <SelectedPlaylistIndex>0</SelectedPlaylistIndex>
+</Playlists>

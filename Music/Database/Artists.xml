@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Artists xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArtistsCollection />
+</Artists>
+      <Songs>
+        <Song>
+          <Title>Call Me (Sefon.me)</Title>
+          <ArtistTitle>Blondie</ArtistTitle>
+          <AlbumTitle />
+          <Path>C:\Users\maxim\Downloads\Blondie - Call Me.mp3</Path>
+        </Song>
+        <Song>
+          <Title>Maria (Sefon.me)</Title>
+          <ArtistTitle>Blondie</ArtistTitle>
+          <AlbumTitle />
+          <Path>C:\Users\maxim\Downloads\Blondie - Maria.mp3</Path>
+        </Song>
+      </Songs>
+    </Artist>
+    <Artist>
+      <Songs>
+        <Song>
+          <Title>Somebody To Love (Sefon.me)</Title>
+          <ArtistTitle>Jefferson Airplane</ArtistTitle>
+          <AlbumTitle />
+          <Path>C:\Users\maxim\Downloads\Jefferson Airplane - Somebody To Love.mp3</Path>
+        </Song>
+        <Song>
+          <Title>Volunteers (Sefon.me)</Title>
+          <ArtistTitle>Jefferson Airplane</ArtistTitle>
+          <AlbumTitle />
+          <Path>C:\Users\maxim\Downloads\Jefferson Airplane - Volunteers.mp3</Path>
+        </Song>
+        <Song>
+          <Title>White Rabbit</Title>
+          <ArtistTitle>Jefferson Airplane</ArtistTitle>
+          <AlbumTitle>Cooool</AlbumTitle>
+          <Path>C:\Users\maxim\Downloads\Jefferson Airplane - White Rabbit.mp3</Path>
+        </Song>
+      </Songs>
+    </Artist>
+  </ArtistsCollection>
+</Artists>
