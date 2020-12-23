@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 using Mp3Lib;
 using Music.Other;
 using System.Drawing;   //for image
+using System.ComponentModel;
+using System.Windows.Media.Imaging;
+using System.Windows.Interop;
+using System.Windows;
+using System.Drawing.Imaging;
 
 namespace Music.Models
 {
-    public class Song
+    public class Song : INotifyPropertyChanged, INotifyPropertyChanging
     {
         private string title;
         private string artist;
@@ -18,18 +23,26 @@ namespace Music.Models
         private string path;
         private bool isFavorite;
         private Image picture;
-        private TimeSpan? duration;
+        private double duration;
         private string genre;
         private string year;
         private string lyrics;
         private string folder;
+        private Mp3File mp3;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangingEventHandler PropertyChanging;
 
         public string Title
         {
             get => title;
             set
             {
+                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(Title)));
                 title = value;
+                mp3.TagHandler.Title = title;
+                mp3.Update();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title)));
             }
         }
 
@@ -38,7 +51,11 @@ namespace Music.Models
             get => artist;
             set
             {
+                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(Artist)));
                 artist = value;
+                mp3.TagHandler.Artist = artist;
+                mp3.Update();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Artist)));
             }
         }
         public string Album
@@ -46,11 +63,15 @@ namespace Music.Models
             get => album;
             set
             {
+                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(Album)));
                 album = value;
+                mp3.TagHandler.Album = album;
+                mp3.Update();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Album)));
             }
         }
-        public string Path 
-        { 
+        public string Path
+        {
             get => path;
             set => path = value;
         }
@@ -61,16 +82,31 @@ namespace Music.Models
             set
             {
                 isFavorite = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(isFavorite)));
             }
         }
 
-        public Image Picture
+        public BitmapImage Picture
         {
-            get => picture;
-            set => picture = value;
+            get
+            {
+                //BitmapSource bt = PictureDecoders.LoadImage(ImageToByteArray(picture));
+                //return BitmapToBitmapImage((Bitmap)picture);
+                return null;
+            }
+            set
+            {
+                //НЕ КОНВЕРТИТ
+                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(Picture)));
+                //picture = (Bitmap)(new ImageConverter()).ConvertFrom(value);
+                picture = BitmapImageToBitmap(value);
+                mp3.TagHandler.Picture = picture;
+                mp3.Update();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Picture)));
+            }
         }
 
-        public TimeSpan? Duration
+        public double Duration
         {
             get => duration;
         }
@@ -90,13 +126,31 @@ namespace Music.Models
         public string Lyrics
         {
             get => lyrics;
-            set => lyrics = value;
+            set
+            {
+                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(Lyrics)));
+                lyrics = value;
+                mp3.TagHandler.Lyrics = lyrics;
+                mp3.Update();
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Lyrics)));
+            }
         }
 
         public string Folder
         {
             get => folder;
             set => folder = value;
+        }
+
+        private bool isChecked = false;
+        public bool IsChecked
+        {
+            get => isChecked;
+            set
+            {
+                isChecked = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsChecked)));
+            }
         }
 
         //значение, которое вернет хэш-функция из id3lib
@@ -106,7 +160,7 @@ namespace Music.Models
 
         public Song(string filePath)
         {
-            Mp3File mp3 = new Mp3File(filePath);
+            mp3 = new Mp3File(filePath);
             //this.database = database;
 
             title = mp3.TagHandler.Title;
@@ -114,7 +168,7 @@ namespace Music.Models
             album = mp3.TagHandler.Album;
             Audio = mp3.Audio.CalculateAudioSHA1();
             picture = mp3.TagHandler.Picture;
-            duration = mp3.TagHandler.Length;
+            duration = mp3.Audio.Duration;
             genre = mp3.TagHandler.Genre;
             year = mp3.TagHandler.Year;
             lyrics = mp3.TagHandler.Lyrics;
@@ -127,7 +181,7 @@ namespace Music.Models
 
             if (picture == null)
             {
-                picture = Image.FromFile(@"..\..\Resources\default.png");
+                picture = Image.FromFile(@"..\..\Resources\Pictures\default.png");
             }
 
             //artist = GetArtist(mp3.TagHandler.Artist);
@@ -147,6 +201,15 @@ namespace Music.Models
                     return false;
             }
             return true;
+        }
+
+        public static bool ComapareSongs(Song song1, Song song2)
+        {
+            if (song1.CompareAudio(song2) &&
+                song1.Title == song2.Title &&
+                song1.Path == song2.Path)
+                return true;
+            else return false;
         }
 
         public bool CompareAudio(byte[] other)
@@ -194,5 +257,61 @@ namespace Music.Models
         //    //}
         //    return null;
         //}
+
+        private static BitmapImage GetImage(Image bm)
+        {
+            using (var ms = new MemoryStream())
+            {
+                bm.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                var image = new BitmapImage();
+                image.BeginInit();
+                ms.Seek(0, SeekOrigin.Begin);
+                image.StreamSource = ms;
+                image.EndInit();
+                return image;
+            }
+        }
+
+        private byte[] ImageToByteArray(Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
+        }
+
+        private Bitmap BitmapImageToBitmap(BitmapImage bitmapImage)
+        {
+            // BitmapImage bitmapImage = new BitmapImage(new Uri("../Images/test.png", UriKind.Relative));
+
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
+
+                return new Bitmap(bitmap);
+            }
+        }
+
+        private BitmapImage BitmapToBitmapImage(Bitmap bitmap)
+        {
+            using (var memory = new MemoryStream())
+            {
+                bitmap.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
+            }
+        }
     }
 }

@@ -26,5 +26,25 @@ namespace Music.Views
         {
             InitializeComponent();
         }
+
+        private void bt_Albums_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void bt_Folders_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bt_Artists_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bt_Songs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

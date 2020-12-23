@@ -21,25 +21,20 @@ namespace Music.Views
     /// </summary>
     public partial class MusicSecondView : UserControl
     {
-        private MusicView mainMusicView;
-        private FullPlayerView fullPlayer;
-        public MusicSecondView(MusicView mv, PlayerViewModel playerViewModel)
+        public MusicSecondView(MiniPlayerView miniPlayerView)
         {
-            mainMusicView = mv; //для доступа к frame
-            fullPlayer = new FullPlayerView(this, mainMusicView) { DataContext = playerViewModel };
-
+            MiniPlayer = miniPlayerView;
             InitializeComponent();
-            MiniPlayer.DataContext = playerViewModel;
         }
 
         private void lb_Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            frame_Content.Navigate((DataContext as MusicViewModel).SelectedItem.Content);
+            frame_Content.Navigate((DataContext as MusicSecondViewModel).SelectedItem.Content);
         }
 
         private void grid_MiniPlayer_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            mainMusicView.frame_MusicWindow.Navigate(fullPlayer);
+            (DataContext as MusicSecondViewModel).NavigateToFullPlayerView();
         }
     }
 }

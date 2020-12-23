@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -51,6 +52,14 @@ namespace Music.Models
             }
         }
 
+        public Player(Song song, bool isPlaying, TimeSpan position)
+        {
+            player = new MediaPlayer();
+            Song = song;
+            IsPlaying = isPlaying;
+            Position = position;
+        }
+
         public Player(Song song)
         {
             IsPlaying = false;
@@ -63,6 +72,7 @@ namespace Music.Models
         {
             if (song != null)
             {
+                Song = song;
                 Open(song.Path);
 
                 if (IsPlaying)
@@ -99,6 +109,36 @@ namespace Music.Models
                 isPlaying = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsPlaying)));
             }
+        }
+
+        public Song Song
+        {
+            get => song;
+            set
+            {
+                song = value;
+            }
+        }
+
+        public void Close()
+        {
+            player.Close();
+            Thread.Sleep(100);  //файл должен успеть закрыться
+        }
+
+        public Player SavePlayerOptions()
+        {
+            return new Player(Song, IsPlaying, Position);
+        }
+
+        public void RestorePlayerOptions(Player player)
+        {
+            Song = player.Song;
+            OpenSong(Song);
+            IsPlaying = player.IsPlaying;
+            Position = player.Position;
+            Duration = player.Duration;
+
         }
     }
 }

@@ -9,9 +9,15 @@
         Title="Music" MinHeight="800" MinWidth="1000"
         WindowStartupLocation="CenterScreen"
         x:Name="window_MusicWindow"
-        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{StaticResource MaterialDesignDarkBackground}"
+        Foreground="{StaticResource MaterialDesignDarkForeground}"
+        
+        WindowState="Maximized"
         Closed="window_MusicWindow_Closed">
     <Frame x:Name="frame_MusicWindow"
            NavigationUIVisibility="Hidden"/>
-    
 </Window>

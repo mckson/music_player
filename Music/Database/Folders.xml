@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Folders xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FoldersCollection>
+    <Folder>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Downloads</Title>
+    </Folder>
+    <Folder>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>BRMC</Title>
+    </Folder>
+    <Folder>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>more songs</Title>
+    </Folder>
+  </FoldersCollection>
+  <SelectedFolder>
+    <ImagePath>Resources\Pictures\default.png</ImagePath>
+    <SongsAudio />
+    <Title>Downloads</Title>
+  </SelectedFolder>
+  <SelectedFolderIndex>0</SelectedFolderIndex>
+</Folders>

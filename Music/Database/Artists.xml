@@ -1,43 +1,74 @@
 <?xml version="1.0"?>
 <Artists xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ArtistsCollection />
-</Artists>
-      <Songs>
-        <Song>
-          <Title>Call Me (Sefon.me)</Title>
-          <ArtistTitle>Blondie</ArtistTitle>
-          <AlbumTitle />
-          <Path>C:\Users\maxim\Downloads\Blondie - Call Me.mp3</Path>
-        </Song>
-        <Song>
-          <Title>Maria (Sefon.me)</Title>
-          <ArtistTitle>Blondie</ArtistTitle>
-          <AlbumTitle />
-          <Path>C:\Users\maxim\Downloads\Blondie - Maria.mp3</Path>
-        </Song>
-      </Songs>
+  <ArtistsCollection>
+    <Artist>
+      <ImagePath>C:\Users\maxim\Downloads\BRMC.jpg</ImagePath>
+      <SongsAudio />
+      <Title>Black Rebel Motorcycle Club</Title>
+      <Description>Black Rebel Motorcycle Club — американская инди-рок-группа, основанная в Сан-Франциско. Название группы копирует название мотоклуба «BRMC» из классического фильма «Дикарь» с Марлоном Брандо в главной роли. Сейчас группа базируется в Лос-Анджелесе. В группе три участника: Питер Хейс, Роберт Левон Бин и Лея Шапиро.</Description>
     </Artist>
     <Artist>
-      <Songs>
-        <Song>
-          <Title>Somebody To Love (Sefon.me)</Title>
-          <ArtistTitle>Jefferson Airplane</ArtistTitle>
-          <AlbumTitle />
-          <Path>C:\Users\maxim\Downloads\Jefferson Airplane - Somebody To Love.mp3</Path>
-        </Song>
-        <Song>
-          <Title>Volunteers (Sefon.me)</Title>
-          <ArtistTitle>Jefferson Airplane</ArtistTitle>
-          <AlbumTitle />
-          <Path>C:\Users\maxim\Downloads\Jefferson Airplane - Volunteers.mp3</Path>
-        </Song>
-        <Song>
-          <Title>White Rabbit</Title>
-          <ArtistTitle>Jefferson Airplane</ArtistTitle>
-          <AlbumTitle>Cooool</AlbumTitle>
-          <Path>C:\Users\maxim\Downloads\Jefferson Airplane - White Rabbit.mp3</Path>
-        </Song>
-      </Songs>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Blondie</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>C:\Users\maxim\Downloads\airplane.jpg</ImagePath>
+      <SongsAudio />
+      <Title>Jefferson Airplane</Title>
+      <Description>Jefferson Airplane — американская рок-группа из Сан-Франциско, пионеры психоделического рока, одна из культовых групп эпохи хиппи. В 1960-е годы Jefferson Airplane была одной из самых востребованных и высокооплачиваемых рок-групп в мире</Description>
+    </Artist>
+    <Artist>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Nickelback</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Scott Mckenzie</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Алиса</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Pink Floyd</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Led Zeppeling</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Led Zeppelin</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Guns'n'roses</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Guns N' Roses</Title>
+    </Artist>
+    <Artist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Guns N Roses</Title>
     </Artist>
   </ArtistsCollection>
+  <SelectedArtist>
+    <ImagePath>C:\Users\maxim\Downloads\BRMC.jpg</ImagePath>
+    <SongsAudio />
+    <Title>Black Rebel Motorcycle Club</Title>
+    <Description>Black Rebel Motorcycle Club — американская инди-рок-группа, основанная в Сан-Франциско. Название группы копирует название мотоклуба «BRMC» из классического фильма «Дикарь» с Марлоном Брандо в главной роли. Сейчас группа базируется в Лос-Анджелесе. В группе три участника: Питер Хейс, Роберт Левон Бин и Лея Шапиро.</Description>
+  </SelectedArtist>
+  <SelectedArtistIndex>0</SelectedArtistIndex>
 </Artists>

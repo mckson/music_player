@@ -11,8 +11,6 @@ C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Music.cspr
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Music.csproj.CoreCompileInputs.cache
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Music.exe
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Music.pdb
-C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\MainWindow.g.cs
-C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\MainWindow.baml
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\bin\Debug\Id3Lib.dll
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\bin\Debug\Mp3Lib.dll
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\bin\Debug\NAudio.dll
@@ -44,5 +42,15 @@ C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\Full
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\MiniPlayerView.baml
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\MusicSecondView.g.cs
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\MusicSecondView.baml
-C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\SongList.g.cs
-C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\SongList.baml
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\SongView.g.cs
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\SongView.baml
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\AlbumView.g.cs
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\ArtistView.g.cs
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\FolderView.g.cs
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\PlaylistView.g.cs
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\AlbumView.baml
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\ArtistView.baml
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\FolderView.baml
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\PlaylistView.baml
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\SettingsView.g.cs
+C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\Views\SettingsView.baml

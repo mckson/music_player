@@ -1,0 +1,213 @@
+﻿<UserControl x:Class="Music.Views.SongView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Music.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{StaticResource MaterialDesignDarkBackground}"
+             Foreground="{StaticResource MaterialDesignDarkForeground}">
+    <Grid 
+        DataContext="{Binding Database.Songs.SelectedSong}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel
+            Grid.Column="1"
+            Grid.Row="0"
+            Grid.ColumnSpan="2">
+            <Button 
+                x:Name="button_Back"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                DockPanel.Dock="Left"
+                Command="{Binding DataContext.GoBackCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                <materialDesign:PackIcon 
+                    Kind="ArrowLeft"
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+            </Button>
+            <TextBlock 
+                Text="Song info"
+                FontSize="24"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                Margin="30 0"
+                DockPanel.Dock="Left"/>
+            <Button
+                x:Name="button_Edit"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                Click="button_Edit_Click"
+                DockPanel.Dock="Right">
+                <materialDesign:PackIcon 
+                    Kind="EditOutline"
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+            </Button>
+            <Button
+                x:Name="button_AllowChanges"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                Click="button_AllowChanges_Click"
+                DockPanel.Dock="Right"
+                Visibility="Collapsed">
+                <materialDesign:PackIcon 
+                    Kind="Check"
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+            </Button>
+            <Button
+                x:Name="button_LoadPicture"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                DockPanel.Dock="Right"
+                Click="button_LoadPicture_Click"
+                Visibility="Collapsed">
+                <materialDesign:PackIcon 
+                    Kind="ImageOutline"
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+                <Button.ToolTip>
+                    <ToolTip Content="Load new picture"
+                             Background="{StaticResource MaterialDesignDarkBackground}"
+                             Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                </Button.ToolTip>
+            </Button>
+            <TextBlock/>
+        </DockPanel>
+
+        <Ellipse 
+            x:Name="ellipse_SongPicture"
+            Grid.Row="1"
+            Grid.Column="1" 
+            Width="200"
+            Height="200"
+            HorizontalAlignment="Center">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Picture}"/>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Song title:"
+                FontSize="16"
+                VerticalAlignment="Center"/>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Artist:"
+                FontSize="16"
+                VerticalAlignment="Center"/>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Album:"
+                FontSize="16"
+                VerticalAlignment="Center"/>
+            <TextBlock 
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Path:"
+                FontSize="16"
+                VerticalAlignment="Center"/>
+
+            <TextBox
+                x:Name="tb_Title"
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Title}"
+                FontSize="16"
+                FontWeight="DemiBold"
+                VerticalAlignment="Center"
+                IsReadOnly="True"/>
+            <TextBox
+                x:Name="tb_Artist"
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Artist}"
+                FontSize="16"
+                FontWeight="DemiBold"
+                VerticalAlignment="Center"
+                IsReadOnly="True"/>
+            <TextBox 
+                x:Name="tb_Album"
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding Album}"
+                FontSize="16"
+                FontWeight="DemiBold"
+                VerticalAlignment="Center"
+                IsReadOnly="True"/>
+            <TextBlock 
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="{Binding Path}"
+                TextWrapping="Wrap"
+                FontSize="16"
+                FontWeight="DemiBold"
+                VerticalAlignment="Center"/>
+            
+        </Grid>
+
+        <TextBox 
+            x:Name="tb_Lyrics"
+            Grid.Row="3"
+            Grid.Column="2"
+            Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+            Text="{Binding Lyrics}"
+            FontSize="16"
+            FontWeight="DemiBold"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+            AcceptsTab="True"
+            IsReadOnly="True"/>
+    </Grid>
+</UserControl>

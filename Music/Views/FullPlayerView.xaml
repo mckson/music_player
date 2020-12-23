@@ -6,6 +6,14 @@
              xmlns:local="clr-namespace:Music.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{StaticResource MaterialDesignDarkBackground}"
+             Foreground="{StaticResource MaterialDesignDarkForeground}"
+             
              Height="Auto" Width="Auto"
              x:Name="FullPlayer">
     <UserControl.Resources>
@@ -17,8 +25,7 @@
     </UserControl.Resources>
     <Grid x:Name="grid_FullPlayer"
           Grid.Row="1"
-          Height="Auto"
-          Background="White">
+          Height="Auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="5*"/>
@@ -38,11 +45,11 @@
         <DockPanel Grid.Row="1"
                    Grid.Column="1">
             <Button x:Name="button_ToMiniPlayer"
-                     Style="{StaticResource MaterialDesignFlatButton}"
-                        Width="50"
-                        Height="50"
-                        Margin="30 0 0 0"
-                        DockPanel.Dock="Left"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Width="50"
+                    Height="50"
+                    Margin="30 0 0 0"
+                    DockPanel.Dock="Left"
                     Click="button_ToMiniPlayer_Click">
                 <materialDesign:PackIcon Kind="ArrowDown"
                                              Width="30"
@@ -64,6 +71,7 @@
             <Button x:Name="button_SwitchIndicator"
                     Width="50"
                     Height="50"
+                    Click="button_SwitchIndicator_Click"
                     Style="{StaticResource MaterialDesignFlatButton}">
                 <materialDesign:PackIcon Kind="DotsGrid"
                                          Width="30"
@@ -72,25 +80,106 @@
                                          HorizontalAlignment="Center"/>
             </Button>
         </DockPanel>
-        <Frame x:Name="frame_PictureLyrics"
-               Grid.Column="1"
-               Grid.Row="3"
-               Height="{Binding ElementName=gridrow_Picture, Path=ActualHeight}"
-               Width="{Binding ElementName=gridrow_Picture, Path=ActualHeight}"/>
-        <Rectangle x:Name="rectangle_SongPicture"
-                   Height="300"
-                   Width="300"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Grid.Row="3"
-                   Grid.Column="1"
-                   RadiusX="15"
-                   RadiusY="15">
-            <Rectangle.Fill>
-                <ImageBrush ImageSource="C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\Resources\default.png"/>
-            </Rectangle.Fill>
+
+        <Grid
+            x:Name="grid_SongPicture"
+            Height="300"
+            Width="300"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="3"
+            Grid.Column="1">
             
-        </Rectangle>
+            <Rectangle x:Name="rectangle_SongPicture"
+                       Height="300"
+                       Width="300"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       RadiusX="15"
+                       RadiusY="15">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\Resources\Pictures\default.png"/>
+                </Rectangle.Fill>
+                
+            </Rectangle>
+        </Grid>
+
+        <Grid
+            x:Name="grid_SongLyrics"
+            Height="300"
+            Width="300"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="3"
+            Grid.Column="1"
+            Visibility="Collapsed">
+
+            <ScrollViewer
+                VerticalScrollBarVisibility="Hidden">
+                <TextBlock Text="{Binding Database.CurrentSongSet.SelectedSong.Lyrics}"
+                       TextWrapping="Wrap"/>
+            </ScrollViewer>
+            
+        </Grid>
+
+        <Grid
+            x:Name="grid_CurrentSongSet"
+            Height="300"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="3"
+            Grid.Column="1"
+            Visibility="Collapsed">
+            <ListBox 
+                x:Name="lb_Songs"
+                Grid.Row="1"
+                Margin="30 0"
+                HorizontalAlignment="Stretch"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                DataContext="{Binding Database.CurrentSongSet}"
+                ItemsSource="{Binding Songs}"
+                SelectedItem="{Binding SelectedSong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel Width="{Binding ElementName=lb_Songs, Path=ActualWidth}">
+                            <Ellipse
+                                Width="50"
+                                Height="50"
+                                Margin="0 0 30 0"
+                                DockPanel.Dock="Left">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Picture}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <StackPanel 
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                DockPanel.Dock="Left">
+                                <TextBlock 
+                                    Text="{Binding Title}"
+                                    FontSize="20"/>
+                                <TextBlock 
+                                    FontSize="16">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                            <Binding Path="Artist"/>
+                                            <Binding Path="Album"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+
         <DockPanel Grid.Column="1"
                    Grid.Row="4"
                    VerticalAlignment="Bottom">
@@ -112,12 +201,13 @@
                 Thumb.DragCompleted="slider_Position_DragCompleted"
                 ValueChanged="slider_Position_ValueChanged"
                 />
-        <StackPanel Orientation="Vertical"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Grid.Row="5"
-                    Grid.Column="1"
-                        DataContext="{Binding Database.Songs.SelectedSong}">
+        <StackPanel 
+            Orientation="Vertical"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="5"
+            Grid.Column="1"
+            DataContext="{Binding Database.CurrentSongSet.SelectedSong}">
             <TextBlock Text="{Binding Title}"
                        FontSize="20"
                        HorizontalAlignment="Center"
@@ -132,17 +222,52 @@
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <Button x:Name="button_Order"
+            <Button x:Name="button_RepeatSong"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Width="70"
                     Height="70"
-                    Margin="30 0 0 0">
-                <materialDesign:PackIcon Kind="OrderAlphabeticalAscending"
+                    Margin="30 0 0 0"
+                    Click="button_RepeatSong_Click">
+                <materialDesign:PackIcon Kind="Repeat"
                                              Width="30"
                                              Height="30"
                                              VerticalAlignment="Center"
                                              HorizontalAlignment="Center"/>
-
+                <Button.ToolTip>
+                    <TextBlock Text="Repeat song"/>
+                </Button.ToolTip>
+            </Button>
+            <Button x:Name="button_PlayInOrder"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Width="70"
+                    Height="70"
+                    Margin="30 0 0 0"
+                    Click="button_PlayInOrder_Click"
+                    Visibility="Collapsed">
+                <materialDesign:PackIcon Kind="RepeatOff"
+                                             Width="30"
+                                             Height="30"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center"/>
+                <Button.ToolTip>
+                    <TextBlock Text="Play in usual order"/>
+                </Button.ToolTip>
+            </Button>
+            <Button x:Name="button_PlayRandomly"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Width="70"
+                    Height="70"
+                    Margin="30 0 0 0"
+                    Click="button_PlayRandomly_Click"
+                    Visibility="Collapsed">
+                <materialDesign:PackIcon Kind="MixerSettings"
+                                             Width="30"
+                                             Height="30"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center"/>
+                <Button.ToolTip>
+                    <TextBlock Text="Play randomly"/>
+                </Button.ToolTip>
             </Button>
             <Button x:Name="button_PlayPrevious"
                     Style="{StaticResource MaterialDesignFlatButton}"
@@ -169,32 +294,7 @@
                                          Height="70"
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Center"/>
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Play"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Pause"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Visible</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Button.Triggers>
+                
 
             </Button>
             <Button x:Name="button_Pause"
@@ -209,32 +309,7 @@
                                          Height="70"
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Center"/>
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Play"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Visible</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Pause"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Button.Triggers>
+                
 
             </Button>
             <Button x:Name="button_PlayNext"
@@ -254,7 +329,21 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                         Width="70"
                         Height="70"
-                        Margin="30 0">
+                        Margin="30 0"
+                    Click="button_CurrentSongSet_Click">
+                <materialDesign:PackIcon Kind="FolderMusicOutline"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center"
+                                             Height="30"
+                                             Width="30"/>
+            </Button>
+            <Button x:Name="button_CurrentSongSetHide"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="70"
+                        Height="70"
+                        Margin="30 0"
+                    Visibility="Collapsed"
+                    Click="button_CurrentSongSetHide_Click">
                 <materialDesign:PackIcon Kind="FolderMusicOutline"
                                              VerticalAlignment="Center"
                                              HorizontalAlignment="Center"
@@ -268,11 +357,11 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
             <ToggleButton x:Name="checkbox_IsFavourite"
-                          IsChecked="{Binding Database.Songs.SelectedSong.IsFavorite}"
+                          IsChecked="{Binding Database.CurrentSongSet.SelectedSong.IsFavorite}"
                           Content="{materialDesign:PackIcon Kind=HeartOutline, Size=30}"
                           Style="{StaticResource MaterialDesignActionToggleButton}"
-                          Background="White"
-                          Foreground="#FF7109D1"
+                          Background="{StaticResource MaterialDesignDarkBackground}"
+                          Foreground="LightGreen"
                           Width="30" 
                           Height="30"
                           Command="{Binding ToFavouritesCommand}"

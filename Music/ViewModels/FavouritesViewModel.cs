@@ -18,6 +18,7 @@ namespace Music.ViewModels
         public FavouritesViewModel(Database database)
         {
             this.database = database;
+            database.CurrentSongSet = database.Songs;
         }
     }
 }

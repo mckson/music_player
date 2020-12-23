@@ -9,11 +9,23 @@ using System.Xml.Serialization;
 
 namespace Music.Models
 {
-    public  abstract class SongSet : INotifyPropertyChanged
+    public abstract class SongSet : INotifyPropertyChanged
     {
         protected internal ObservableCollection<Song> songs;
         protected internal Song selectedSong;                  //for ListBox, DataGrid binding and other bindings with selection
         protected internal int selectedIndex;                  //the same as 
+        private string imagePath = @"..\..\Resources\Pictures\default.png";
+        private bool isEmpty;
+
+        public string ImagePath
+        {
+            get => imagePath;
+            set
+            {
+                imagePath = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ImagePath)));
+            }
+        }
 
         [XmlIgnore]
         public Song SelectedSong
@@ -49,11 +61,7 @@ namespace Music.Models
         }
 
         //набор байтов возвращаемый встроенной функцией
-        public ObservableCollection<byte[]> SongsAudio
-        {
-            get;
-            set;
-        }
+        public ObservableCollection<byte[]> SongsAudio { get; set; }
 
         public SongSet()
             : this(null, null) { }
@@ -71,14 +79,18 @@ namespace Music.Models
                 SongsAudio = songsAudio;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged; 
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public virtual bool AddSong(Song song)
         {
             if (ContainsAudio(song))
             {
-                throw new Exception("Playlist already contains this song");
-                //return false;
+                    //throw new Exception("Playlist already contains this song");
+                    return false;
             }
 
             songs.Add(song);

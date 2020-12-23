@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Directories xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DirectoriesCollection>
+    <Directory>
+      <Path>C:\Users\maxim\Downloads</Path>
+    </Directory>
+    <Directory>
+      <Path>C:\Users\maxim\Downloads\BRMC</Path>
+    </Directory>
+  </DirectoriesCollection>
+  <SelectedIndex>-1</SelectedIndex>
+</Directories>

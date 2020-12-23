@@ -1,7 +1,9 @@
 ﻿using Music.Other;
 using Music.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Music.Views
 {
@@ -11,17 +13,28 @@ namespace Music.Views
     public partial class MusicView : Window
     {
         private Database database;
+
         public MusicView()
         {
-            database = new Database();
-            MusicViewModel musicViewModel = new MusicViewModel(database, this, musicSecondView);    //для musicSecond отдельная vm???
-
-
-            MusicSecondView musicSecondView = new MusicSecondView(this, new PlayerViewModel(database)) { DataContext = musicViewModel };
-
             InitializeComponent();
+            database = new Database();
+            MusicViewModel musicViewModel = new MusicViewModel(database, this);
+            DataContext = musicViewModel;
 
-            frame_MusicWindow.Navigate(musicSecondView);
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Tick += timer_Tick;
+            timer.Start();
+
+
+            (DataContext as MusicViewModel).NavigateToMusicSecondView();
+            //(DataContext as MusicViewModel).NavigateToSongView();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            //database.Syncronize();
         }
 
         private void window_MusicWindow_Closed(object sender, System.EventArgs e)

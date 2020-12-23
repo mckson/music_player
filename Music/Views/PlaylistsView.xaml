@@ -6,78 +6,398 @@
              xmlns:local="clr-namespace:Music.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White"
-          HorizontalAlignment="Stretch">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition x:Name="rowContent"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Playlists"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   VerticalAlignment="Center"
-                   Margin="30 0"/>
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    Grid.Row="1"
-                    Margin="30 0"
-                    Orientation="Horizontal">
-            <Button x:Name="bt_AddPlaylist"
+             
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{StaticResource MaterialDesignDarkBackground}"
+             Foreground="{StaticResource MaterialDesignDarkForeground}"
+             
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="usercontrol_PlaylistsView">
+    <Grid>
+        <Grid 
+            x:Name="grid_Main"
+            HorizontalAlignment="Stretch"
+            Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition x:Name="rowContent"/>
+            </Grid.RowDefinitions>
+            <TextBlock 
+                Text="Playlists"
+                FontSize="24"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                Margin="30 0"/>
+            <DockPanel 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch"
+                Grid.Row="1"
+                Margin="30 0">
+                <Button 
+                    x:Name="bt_AddPlaylist"
                     Width="50"
                     Height="50"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignFlatButton}">
-                <materialDesign:PackIcon Kind="Plus"
-                                         VerticalAlignment="Center"
-                                         HorizontalAlignment="Center"
-                                         Width="30"
-                                         Height="30"/>
-            </Button>
-            <TextBlock x:Name="tb_Songs"
-                       Text="Create new"
-                       FontSize="20"
-                       Margin="20 0"
-                       VerticalAlignment="Center"/>
-        </StackPanel>
+                    <materialDesign:PackIcon 
+                        Kind="Plus"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Width="30"
+                        Height="30"/>
+                    <Button.Triggers>
+                        <EventTrigger 
+                            RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="grid_Main"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="grid_CreateNew"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Visible</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <TextBlock 
+                    x:Name="tb_Songs"
+                    Text="Create new"
+                    FontSize="20"
+                    Margin="20 0"
+                    VerticalAlignment="Center"/>
+                <Button 
+                        x:Name="button_Actions"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="50"
+                        Height="50"
+                        DockPanel.Dock="Right"
+                        Command="{Binding DataContext.OpenPlaylistCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                        <materialDesign:PackIcon
+                            Kind="MenuOpen"
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="Open playlist"/>
+                        </ToolTip>
+                    </Button.ToolTip>
+                    </Button>
+                    <Button 
+                        x:Name="button_PlayPlaylist"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="50"
+                        Height="50"
+                        DockPanel.Dock="Right"
+                        Command="{Binding DataContext.PlayPlaylistCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                        <materialDesign:PackIcon
+                            Kind="PlayOutline"
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Button>
+                    <Button 
+                        x:Name="button_PausePlaylist"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="50"
+                        Height="50"
+                        DockPanel.Dock="Right"
+                        Visibility="Collapsed"
+                        Command="{Binding DataContext.PausePlaylistCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                        <materialDesign:PackIcon
+                            Kind="Pause"
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Button>
+                <TextBlock/>
+            </DockPanel>
 
-        <Grid x:Name="grid_Playlists"
-              Grid.Row="2"
-              HorizontalAlignment="Stretch">
-            <ListBox Grid.Row="3"
-                     Margin="30 0"
-                     HorizontalAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                     DataContext="{Binding Database.Playlists}"
-                     ItemsSource="{Binding PlaylistsCollection}"
-                     SelectedItem="{Binding SelectedPlaylist}"
-                     SelectedIndex="{Binding SelectedPlaylistIndex}"
-                     MouseDown="ListBox_MouseDown">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Stretch"
-                              Width="800">
-                            <StackPanel Orientation="Vertical"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Title}"
-                                           FontSize="20"/>
-                                <TextBlock Text="{Binding Songs.Count, StringFormat=\{0\} songs}"
-                                               FontSize="16"/>
-                            </StackPanel>
-                            <Button x:Name="button_Actions"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="⋮"
+            <Grid 
+                x:Name="grid_Playlists"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <ListBox 
+                    x:Name="listBox_Playlists"
+                    Margin="30 0"
+                    HorizontalAlignment="Stretch"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    DataContext="{Binding Database.Playlists}"
+                    ItemsSource="{Binding PlaylistsCollection}"
+                    SelectedItem="{Binding SelectedPlaylist}"
+                    SelectedIndex="{Binding SelectedPlaylistIndex}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel
+                                Width="{Binding ElementName=listBox_Playlists, Path=ActualWidth}">
+                                <Rectangle
                                     Width="50"
                                     Height="50"
-                                    HorizontalAlignment="Right"/>
-                        </Grid>                           
+                                    Margin="0 0 30 0"
+                                    DockPanel.Dock="Left">
+                                    <Rectangle.Fill>
+                                        <ImageBrush
+                                            Stretch="UniformToFill"
+                                            ImageSource="{Binding ImagePath}"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <StackPanel 
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    DockPanel.Dock="Left">
+                                    <TextBlock 
+                                        Text="{Binding Title}"
+                                        FontSize="20"/>
+                                    <TextBlock 
+                                        Text="{Binding Songs.Count, StringFormat=\{0\} songs}"
+                                        FontSize="16"/>
+                                </StackPanel>
+                                <TextBlock/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+        <Grid
+            x:Name="grid_CreateNew"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <DockPanel
+                Grid.Row="0">
+                <Button 
+                    x:Name="button_Back"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Width="50"
+                    Height="50"
+                    Click="button_Back_Click"
+                    DockPanel.Dock="Right">
+                    <materialDesign:PackIcon 
+                        Kind="Close"
+                        Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"/>
+                    <Button.Triggers>
+                        <EventTrigger 
+                            RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="grid_Main"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Visible</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="grid_CreateNew"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <TextBlock 
+                    Text="New playlist"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    Margin="30 0"
+                    DockPanel.Dock="Left"/>
+            </DockPanel>
+            
+            
+            <Grid
+                Grid.Row="1"
+                Margin="30 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Title:"
+                    FontSize="20"
+                    VerticalAlignment="Center"/>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Description:"
+                    FontSize="20"
+                    VerticalAlignment="Center"/>
+                
+
+                <TextBox
+                    x:Name="tb_Title"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="20"
+                    FontWeight="DemiBold"
+                    VerticalAlignment="Center"/>
+                <TextBox
+                    x:Name="tb_Description"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="20"
+                    FontWeight="DemiBold"
+                    VerticalAlignment="Center"/>
+            </Grid>
+
+            <DockPanel
+                Grid.Row="3"
+                Margin="30 0"
+                VerticalAlignment="Center">
+                <materialDesign:PackIcon 
+                    Kind="Search"
+                    Width="30"
+                    Height="30"
+                    Margin="0 0 30 0"
+                    DockPanel.Dock="Left"
+                    VerticalAlignment="Center"
+                    Foreground="LightGreen"/>
+                <TextBox
+                    x:Name="tb_Search"
+                    VerticalAlignment="Center"
+                    Width="300"
+                    FontSize="16"
+                    DockPanel.Dock="Left"
+                    Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"/>
+                <TextBlock/>
+            </DockPanel>
+            
+            <ListBox 
+                x:Name="lb_Songs"
+                Grid.Row="5"
+                Margin="30 0"
+                HorizontalAlignment="Stretch"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                ItemsSource="{Binding SongsCollection}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel Width="{Binding ElementName=lb_Songs, Path=ActualWidth}">
+                            <StackPanel 
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                DockPanel.Dock="Left">
+                                <TextBlock 
+                                    Text="{Binding Title}"
+                                    FontSize="20"/>
+                                <TextBlock 
+                                    FontSize="16">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                            <Binding Path="Artist"/>
+                                            <Binding Path="Album"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                            <CheckBox 
+                                x:Name="chb_ToPlaylist"
+                                IsChecked="{Binding IsChecked}"
+                                Style="{StaticResource MaterialDesignAccentCheckBox}"
+                                Width="50"
+                                Height="50"
+                                DockPanel.Dock="Right"/>
+                            <TextBlock/>
+                        </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </Grid>
 
+            <Button
+                x:Name="button_Create"
+                Grid.Row="7"
+                Width="150"
+                Height="50"
+                Content="Create"
+                FontSize="20"
+                Click="button_Create_Click"
+                HorizontalAlignment="Right"
+                Style="{StaticResource MaterialDesignFlatButton}">
+                <Button.Triggers>
+                    <EventTrigger 
+                            RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="grid_Main"
+                                        Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Visible</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="grid_CreateNew"
+                                        Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Collapsed</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

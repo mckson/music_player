@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/songs.xml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/pictures/default.png")]
 
 

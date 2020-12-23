@@ -1,2 +1,63 @@
 <?xml version="1.0"?>
-<Albums xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<Albums xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AlbumsCollection>
+    <Album>
+      <ImagePath>C:\Users\maxim\Downloads\google-play-music-desktop-3.jpg</ImagePath>
+      <SongsAudio />
+      <Title>Downloads</Title>
+      <Description>dsgfadg</Description>
+    </Album>
+    <Album>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Parallel Lines</Title>
+    </Album>
+    <Album>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>The Female Touch 2</Title>
+    </Album>
+    <Album>
+      <ImagePath>Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Atomic</Title>
+    </Album>
+    <Album>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Take Them On, On Your Own</Title>
+    </Album>
+    <Album>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>BRMC</Title>
+    </Album>
+    <Album>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Beat the Devil's Tattoo</Title>
+    </Album>
+    <Album>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Cool</Title>
+    </Album>
+    <Album>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>Baby 81</Title>
+    </Album>
+    <Album>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio />
+      <Title>more songs</Title>
+    </Album>
+  </AlbumsCollection>
+  <SelectedAlbum>
+    <ImagePath>C:\Users\maxim\Downloads\google-play-music-desktop-3.jpg</ImagePath>
+    <SongsAudio />
+    <Title>Downloads</Title>
+    <Description>dsgfadg</Description>
+  </SelectedAlbum>
+  <SelectedAlbumIndex>0</SelectedAlbumIndex>
+</Albums>

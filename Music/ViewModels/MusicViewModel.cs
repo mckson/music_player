@@ -6,72 +6,80 @@ using System.ComponentModel;
 
 namespace Music.ViewModels
 {
-    public class MusicViewModel : INotifyPropertyChanged
+    public class MusicViewModel
     {
-        public MusicViewModel(Database database, MusicView musicView, MusicSecondView musicSecondView)
-        {
-            //Передавть информацию об окнах не через View коснтрукторы, а через MV кострукторы
-            this.database = database;
-            this.musicView = musicView;
-            this.musicSecondView = musicSecondView;
-            menuItems = GenerateMenuItems();
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private ObservableCollection<MenuItem> menuItems;
-        private MenuItem selectedItem;
-        private int selectedIndex;
+        private Database database;
 
         private MusicView musicView;
         private MusicSecondView musicSecondView;
+        private FullPlayerView fullPlayerView;
+        private SongView songView;
 
-        private Database database;
-        public Database Database
+        //Initialization of all secondary UserControls that are viaible from MusicView
+        //  - full player
+        //  - secondary MusicView + mini player
+        //  - song view
+        public MusicViewModel(Database database,
+           MusicView musicView)
         {
-            get => database;
+            this.database = database;
+            this.musicView = musicView;
+
+            fullPlayerView = new FullPlayerView();
+            MiniPlayerView miniPlayerView = new MiniPlayerView();
+
+            PlayerViewModel playerViewModel = new PlayerViewModel(database, musicView/*, fullPlayerView, miniPlayerView*/);
+
+            fullPlayerView.DataContext = playerViewModel;
+            playerViewModel.fullPlayerView = fullPlayerView;
+
+            musicSecondView = new MusicSecondView(miniPlayerView);
+            musicSecondView.DataContext = new MusicSecondViewModel(database, musicView, musicSecondView);
+            musicSecondView.MiniPlayer.DataContext = playerViewModel;
+
+            playerViewModel.miniPlayerView = musicSecondView.MiniPlayer;
+
+            songView = new SongView() { DataContext = new SongViewModel(database, musicView) };
+
         }
 
-        public ObservableCollection<MenuItem> MenuItems
+        public void NavigateToMusicSecondView()
         {
-            get => menuItems;
-            set
-            {
-                menuItems = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MenuItems)));
-            }
+            musicView.frame_MusicWindow.Navigate(musicSecondView);
         }
 
-        public MenuItem SelectedItem
+        public void NavigateToFullPlayerView()
         {
-            get => selectedItem;
-            set
-            {
-                if (value == null || value.Equals(selectedItem)) return;
-
-                selectedItem = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedItem)));
-            }
+            musicView.frame_MusicWindow.Navigate(fullPlayerView);
         }
 
-        public int SelectedIndex
+        public void NavigateToSongView()
         {
-            get => selectedIndex;
-            set
-            {
-                selectedIndex = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedIndex)));
-            }
+            //ClosePlayer();
+            musicView.frame_MusicWindow.Navigate(songView);
         }
 
-        private ObservableCollection<MenuItem> GenerateMenuItems()
+        //public void ClosePlayer()
+        //{
+        //    PlayerViewModel playerViewModel = fullPlayerView.DataContext as PlayerViewModel;
+        //    playerViewModel.Close();
+        //}
+
+        public void OpenPlayer()
         {
-            return new ObservableCollection<MenuItem>
-            {
-                new MenuItem("All songs", new AllSongsView { DataContext = new AllSongsViewModel(database) }, new PackIcon{ Kind = PackIconKind.MusicNoteOutline }),
-                new MenuItem("Playlists", new PlaylistsView { DataContext = new PlaylistsViewModel(database) }, new PackIcon{ Kind = PackIconKind.PlaylistMusicOutline }),
-                new MenuItem("Favourites", new FavouritesView{ DataContext = new FavouritesViewModel(database) }, new PackIcon{ Kind = PackIconKind.HeartOutline }),
-                new MenuItem("Settings", null, new PackIcon{ Kind = PackIconKind.Settings })
-            };
+            PlayerViewModel playerViewModel = fullPlayerView.DataContext as PlayerViewModel;
+        }
+
+        public void PlayPlaylist()
+        {
+            PlayerViewModel playerViewModel = fullPlayerView.DataContext as PlayerViewModel;
+            playerViewModel.PlayPlaylist();
+        }
+
+        public void PausePlaylist()
+        {
+            PlayerViewModel playerViewModel = fullPlayerView.DataContext as PlayerViewModel;
+            playerViewModel.PausePlaylist();
         }
     }
 }

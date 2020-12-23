@@ -6,14 +6,24 @@
              xmlns:local="clr-namespace:Music.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="70" d:DesignWidth="800">
+             
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="#FF252424"
+             Foreground="{StaticResource MaterialDesignDarkForeground}"
+             
+             Height="70" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="style_PlayButton" 
-               TargetType="Button"
-               BasedOn="{StaticResource MaterialDesignFlatButton}">
+        <Style 
+            x:Key="style_PlayButton" 
+            TargetType="Button"
+            BasedOn="{StaticResource MaterialDesignFlatButton}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsPlaying, UpdateSourceTrigger=PropertyChanged}"
-                             Value="true">
+                <DataTrigger 
+                    Binding="{Binding IsPlaying, UpdateSourceTrigger=PropertyChanged}"
+                    Value="true">
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
@@ -28,8 +38,9 @@
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding IsPlaying}"
-                             Value="false">
+                <DataTrigger 
+                    Binding="{Binding IsPlaying}"
+                    Value="false">
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
@@ -46,8 +57,9 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="style_PauseButton"
-               BasedOn="{StaticResource MaterialDesignFlatButton}">
+        <Style 
+            x:Key="style_PauseButton"
+            BasedOn="{StaticResource MaterialDesignFlatButton}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsPlaying}"
                              Value="true">
@@ -84,139 +96,84 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid x:Name="grid_MiniPlayer"
-              Visibility="Visible"
-              Height="70"
-          Background="White">
-
-        <DockPanel HorizontalAlignment="Stretch"
-                       VerticalAlignment="Center">
-            <Ellipse x:Name="ellipse_SongPicture"
-                         Width="65"
-                         Height="65"
-                         Margin="30 0 0 0"
-                         DockPanel.Dock="Left">
+    <Grid 
+        x:Name="grid_MiniPlayer"
+        Visibility="Visible"
+        Height="70">
+        <DockPanel 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <Ellipse 
+                x:Name="ellipse_SongPicture"
+                Width="50"
+                Height="50"
+                Margin="30 0 0 0"
+                DockPanel.Dock="Left">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\Resources\default.png"/>
+                    <ImageBrush ImageSource="C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\Resources\Pictures\default.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <StackPanel Orientation="Vertical"
-                        Margin="15 0"
-                        DockPanel.Dock="Left"
-                        VerticalAlignment="Center"
-                        DataContext="{Binding Database.Songs.SelectedSong, UpdateSourceTrigger=PropertyChanged}">
-                <TextBlock Text="{Binding Title}"
-                               FontSize="16"/>
-                <TextBlock Text="{Binding Artist}"
-                               FontSize="12"/>
+            <StackPanel 
+                Orientation="Vertical"
+                Margin="15 0"
+                DockPanel.Dock="Left"
+                VerticalAlignment="Center"
+                DataContext="{Binding Database.CurrentSongSet.SelectedSong, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock 
+                    Text="{Binding Title}"
+                    FontSize="16"/>
+                <TextBlock 
+                    Text="{Binding Artist}"
+                    FontSize="12"/>
             </StackPanel>
-            <Button x:Name="button_CurrentSongSet"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                        Width="50"
-                        Height="50"
-                        Margin="0 0 30 0"
-                        DockPanel.Dock="Right">
-                <materialDesign:PackIcon Kind="FolderMusicOutline"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Center"
-                                             Height="30"
-                                             Width="30"/>
+            <Button 
+                x:Name="button_PlayNext"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                Margin="0 0 10 0"
+                DockPanel.Dock="Right"
+                Command="{Binding PlayNextCommand}">
+                <materialDesign:PackIcon 
+                    Kind="SkipNext"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Height="30"
+                    Width="30"/>
             </Button>
-            <Button x:Name="button_PlayNext"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Width="50"
-                    Height="50"
-                    Margin="0 0 10 0"
-                    DockPanel.Dock="Right"
-                    Command="{Binding PlayNextCommand}">
-                <materialDesign:PackIcon Kind="SkipNext"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Center"
-                                             Height="30"
-                                             Width="30"/>
+            <Button
+                x:Name="button_Pause"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                Margin="0 0 10 0"
+                DockPanel.Dock="Right"
+                Visibility="Collapsed"
+                Command="{Binding PauseCommand}">
+                <materialDesign:PackIcon 
+                    Kind="Pause"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Height="30"
+                    Width="30"/>
+                
             </Button>
-            <Button x:Name="button_Pause"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Width="50"
-                    Height="50"
-                    Margin="0 0 10 0"
-                    DockPanel.Dock="Right"
-                    Visibility="Collapsed"
-                    Command="{Binding PauseCommand}">
-                <materialDesign:PackIcon Kind="Pause"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Center"
-                                             Height="30"
-                                             Width="30"/>
-                <Button.Triggers>
-                    
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Play"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Visible</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Pause"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Button.Triggers>
-            </Button>
-            <Button x:Name="button_Play"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Width="50"
-                    Height="50"
-                    Margin="0 0 10 0"
-                    DockPanel.Dock="Right"
-                    Visibility="Visible"
-                    Command="{Binding PlayCommand}">
-                <materialDesign:PackIcon Kind="PlayOutline"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Center"
-                                             Height="30"
-                                             Width="30"/>
-                <Button.Triggers>
-
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Play"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="button_Pause"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Visible</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Button.Triggers>
-
+            <Button
+                x:Name="button_Play"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                Margin="0 0 10 0"
+                DockPanel.Dock="Right"
+                Visibility="Visible"
+                Command="{Binding PlayCommand}">
+                <materialDesign:PackIcon
+                    Kind="PlayOutline"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Height="30"
+                    Width="30"/>
+                
             </Button>
             <TextBlock/>
         </DockPanel>

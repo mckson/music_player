@@ -2,23 +2,42 @@
 <Playlists xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PlaylistsCollection>
     <Playlist>
+      <ImagePath>C:\Users\maxim\Downloads\parallel lines.jpg</ImagePath>
       <SongsAudio>
-        <base64Binary>oXyapUz/tlKB3KRcmDOJuJMN3rM=</base64Binary>
-        <base64Binary>KyzVoZ4r9G8O8YBqBrnvm4+0npk=</base64Binary>
-        <base64Binary>tN6YNSytzv/3iHNCNYjNb0e6AYU=</base64Binary>
-        <base64Binary>f0AHz46nx5aC8v2/LFzTF02+6D4=</base64Binary>
+        <base64Binary>JPJICpGJi9xC2yPTwvaJJa/Dylc=</base64Binary>
+        <base64Binary>mAyPsS9tFU3r+z0q9dPDSKPP3LY=</base64Binary>
+        <base64Binary>zPj7Uk2QjArEbNu6jzux98+X3g0=</base64Binary>
+        <base64Binary>clagMBpMvGSo02yknrD2Cm1Fp6Y=</base64Binary>
       </SongsAudio>
-      <Title>My Another Playlist</Title>
+      <Title>Add</Title>
+      <Description>New</Description>
+    </Playlist>
+    <Playlist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio>
+        <base64Binary>zPj7Uk2QjArEbNu6jzux98+X3g0=</base64Binary>
+      </SongsAudio>
+      <Title>kjsfdsm</Title>
+      <Description>kjfg;lks</Description>
+    </Playlist>
+    <Playlist>
+      <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
+      <SongsAudio>
+        <base64Binary>Zptjm9MQ/yBfyXr4zJGXmhLDfYg=</base64Binary>
+        <base64Binary>hYDLOn6ySwdCjlP+coTVSWVhM6E=</base64Binary>
+      </SongsAudio>
+      <Title>Hzxkjg</Title>
+      <Description>DSFJKSLFD</Description>
     </Playlist>
   </PlaylistsCollection>
   <SelectedPlaylist>
+    <ImagePath>..\..\Resources\Pictures\default.png</ImagePath>
     <SongsAudio>
-      <base64Binary>oXyapUz/tlKB3KRcmDOJuJMN3rM=</base64Binary>
-      <base64Binary>KyzVoZ4r9G8O8YBqBrnvm4+0npk=</base64Binary>
-      <base64Binary>tN6YNSytzv/3iHNCNYjNb0e6AYU=</base64Binary>
-      <base64Binary>f0AHz46nx5aC8v2/LFzTF02+6D4=</base64Binary>
+      <base64Binary>Zptjm9MQ/yBfyXr4zJGXmhLDfYg=</base64Binary>
+      <base64Binary>hYDLOn6ySwdCjlP+coTVSWVhM6E=</base64Binary>
     </SongsAudio>
-    <Title>My Another Playlist</Title>
+    <Title>Hzxkjg</Title>
+    <Description>DSFJKSLFD</Description>
   </SelectedPlaylist>
-  <SelectedPlaylistIndex>0</SelectedPlaylistIndex>
+  <SelectedPlaylistIndex>2</SelectedPlaylistIndex>
 </Playlists>

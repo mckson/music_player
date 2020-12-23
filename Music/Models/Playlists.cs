@@ -20,7 +20,7 @@ namespace Music.Models
             set
             {
                 playlists = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Playlists)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PlaylistsCollection)));
             }
         }
 

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\App.xaml
-9-280871349
+131494055420
 
-30-508164623
+49-650607014
 20-1585384194
-Views\AllSongsView.xaml;Views\FavouritesView.xaml;Views\FullPlayerView.xaml;Views\MainWindow.xaml;Views\MiniPlayerView.xaml;Views\MusicSecondView.xaml;Views\MusicView.xaml;Views\PlaylistsView.xaml;Views\SongList.xaml;
+Views\AlbumView.xaml;Views\AllSongsView.xaml;Views\ArtistView.xaml;Views\FavouritesView.xaml;Views\FolderView.xaml;Views\FullPlayerView.xaml;Views\MiniPlayerView.xaml;Views\MusicSecondView.xaml;Views\MusicView.xaml;Views\PlaylistsView.xaml;Views\PlaylistView.xaml;Views\SettingsView.xaml;Views\SongView.xaml;
 
 True
 

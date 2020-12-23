@@ -4,35 +4,58 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Music.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{StaticResource MaterialDesignDarkBackground}"
+             Foreground="{StaticResource MaterialDesignDarkForeground}"
+             
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition x:Name="rowContent"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="All songs"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   VerticalAlignment="Center"
-                   Margin="30 0"/>
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Grid.Row="1"
-                    Orientation="Horizontal">
-            <TextBlock x:Name="tb_Songs"
-                       Text="Songs"
-                       FontSize="20"
-                       Margin="20 0"
-                       Foreground="Red">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.MouseDown">
+        <TextBlock 
+            Text="All songs"
+            FontSize="24"
+            FontWeight="Bold"
+            VerticalAlignment="Center"
+            Margin="30 0"/>
+        <StackPanel 
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Center"
+            Grid.Row="1"
+            Orientation="Horizontal">
+            <Button 
+                x:Name="bt_Songs"
+                Click="bt_Songs_Click"
+                Content="Songs"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                FontSize="20"
+                Width="120"
+                Height="40"
+                Foreground="LightGreen"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Command="{Binding SyncronizeInfoCommand}">
+                <Button.Triggers>
+                    <EventTrigger 
+                            RoutedEvent="Button.Click">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Songs"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                            Storyboard.TargetName="gr_Songs"
+                                            Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Visible</Visibility>
@@ -40,8 +63,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Artists"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                            Storyboard.TargetName="gr_Artists"
+                                            Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -49,8 +73,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Albums"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                            Storyboard.TargetName="gr_Albums"
+                                            Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -58,8 +83,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Folders"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                            Storyboard.TargetName="gr_Folders"
+                                            Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -67,40 +93,62 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ColorAnimation Storyboard.TargetName="tb_Songs"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Red"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Artists"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Albums"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Folders"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
+                                    <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="dockPanel_Buttons"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ColorAnimation 
+                                            Storyboard.TargetName="bt_Songs"
+                                            Storyboard.TargetProperty="Foreground.Color"
+                                            To="LightGreen"
+                                            Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                            Storyboard.TargetName="bt_Artists"
+                                            Storyboard.TargetProperty="Foreground.Color"
+                                            To="White"
+                                            Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                            Storyboard.TargetName="bt_Albums"
+                                            Storyboard.TargetProperty="Foreground.Color"
+                                            To="White"
+                                            Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                            Storyboard.TargetName="bt_Folders"
+                                            Storyboard.TargetProperty="Foreground.Color"
+                                            To="White"
+                                            Duration="0:0:0"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+                </Button.Triggers>
+            </Button>
 
-            <TextBlock x:Name="tb_Artists"
-                       Text="Artists"
-                       FontSize="20"
-                       Margin="20 0">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.MouseDown">
+            <Button 
+                x:Name="bt_Artists"
+                Click="bt_Artists_Click"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Content="Artists"
+                Width="120"
+                Height="40"
+                Foreground="White"
+                FontSize="20"
+                Command="{Binding SyncronizeInfoCommand}">
+                <Button.Triggers>
+                    <EventTrigger 
+                        RoutedEvent="Button.Click">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Songs"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Songs"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -108,8 +156,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Artists"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Artists"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Visible</Visibility>
@@ -117,8 +166,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Albums"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Albums"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -126,8 +176,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Folders"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Folders"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -135,59 +186,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ColorAnimation Storyboard.TargetName="tb_Songs"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Artists"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Red"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Albums"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Folders"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </TextBlock.Triggers>
-
-            </TextBlock>
-
-            <TextBlock x:Name="tb_Albums"
-                       Text="Albums"
-                       FontSize="20"
-                       Margin="20 0">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.MouseDown">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Songs"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Artists"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Albums"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="dockPanel_Buttons"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Visible</Visibility>
@@ -195,49 +196,52 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Folders"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-
-                                    <ColorAnimation Storyboard.TargetName="tb_Songs"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Artists"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Albums"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Red"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Folders"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Songs"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Artists"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="LightGreen"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Albums"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Folders"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+                </Button.Triggers>
+            </Button>
 
-            <TextBlock x:Name="tb_Folders"
-                       Text="Folders"
-                       FontSize="20"
-                       Margin="20 0">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.MouseDown">
+            <Button 
+                x:Name="bt_Albums"
+                Click="bt_Albums_Click"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Content="Albums"
+                Foreground="White"
+                Width="120"
+                Height="40"
+                FontSize="20"
+                Command="{Binding SyncronizeInfoCommand}">
+                <Button.Triggers>
+                    <EventTrigger 
+                        RoutedEvent="Button.Click">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Songs"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Songs"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -245,8 +249,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Artists"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Artists"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Collapsed</Visibility>
@@ -254,17 +259,9 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Albums"
-                                                                   Storyboard.TargetProperty="Visibility">
-                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Visibility>Collapsed</Visibility>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
-
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gr_Folders"
-                                                                   Storyboard.TargetProperty="Visibility">
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Albums"
+                                        Storyboard.TargetProperty="Visibility">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                             <DiscreteObjectKeyFrame.Value>
                                                 <Visibility>Visible</Visibility>
@@ -272,51 +269,246 @@
                                         </DiscreteObjectKeyFrame>
                                     </ObjectAnimationUsingKeyFrames>
 
-                                    <ColorAnimation Storyboard.TargetName="tb_Songs"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Artists"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Albums"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Black"
-                                                    Duration="0:0:0"/>
-                                    <ColorAnimation Storyboard.TargetName="tb_Folders"
-                                                    Storyboard.TargetProperty="Foreground.Color"
-                                                    To="Red"
-                                                    Duration="0:0:0"/>
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Folders"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="dockPanel_Buttons"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Visible</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Songs"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Artists"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Albums"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="LightGreen"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Folders"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+                </Button.Triggers>
+            </Button>
+
+            <Button 
+                x:Name="bt_Folders"
+                Click="bt_Folders_Click"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Content="Folders"
+                Foreground="White"
+                
+                Width="120"
+                Height="40"
+                FontSize="20"
+                Command="{Binding SyncronizeInfoCommand}">
+                <Button.Triggers>
+                    <EventTrigger
+                        RoutedEvent="Button.Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Songs"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Artists"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ObjectAnimationUsingKeyFrames 
+                                        Storyboard.TargetName="gr_Albums"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="gr_Folders"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Visible</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ObjectAnimationUsingKeyFrames
+                                        Storyboard.TargetName="dockPanel_Buttons"
+                                        Storyboard.TargetProperty="Visibility">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Visible</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Songs"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Artists"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Albums"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="White"
+                                        Duration="0:0:0"/>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="bt_Folders"
+                                        Storyboard.TargetProperty="Foreground.Color"
+                                        To="LightGreen"
+                                        Duration="0:0:0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
         </StackPanel>
 
-        <Grid x:Name="gr_Songs"
-              Grid.Row="2"
-              Visibility="Visible">
-            <ListBox Grid.Row="3"
-                     Margin="30 0"
-                     HorizontalAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                     DataContext="{Binding Database.Songs}"
-                     ItemsSource="{Binding SongsCollection}"
-                     SelectedItem="{Binding SelectedSong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+        <Grid
+            x:Name="dockPanel_Buttons"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Stretch"
+            Grid.Row="2"
+            Margin="30 0"
+            Height="50"
+            Visibility="Collapsed">
+        <DockPanel 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Stretch">
+            <Button 
+                x:Name="button_Actions"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Width="50"
+                Height="50"
+                DockPanel.Dock="Right"
+                Command="{Binding DataContext.OpenPlaylistCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                <materialDesign:PackIcon
+                            Kind="MenuOpen"
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Open playlist"/>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button 
+                        x:Name="button_PlayPlaylist"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="50"
+                        Height="50"
+                        DockPanel.Dock="Right"
+                        Command="{Binding DataContext.PlayPlaylistCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                <materialDesign:PackIcon
+                            Kind="PlayOutline"
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+            </Button>
+            <Button 
+                        x:Name="button_PausePlaylist"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="50"
+                        Height="50"
+                        DockPanel.Dock="Right"
+                        Visibility="Collapsed"
+                        Command="{Binding DataContext.PausePlaylistCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                <materialDesign:PackIcon
+                            Kind="Pause"
+                            Width="30"
+                            Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+            </Button>
+            <TextBlock/>
+        </DockPanel>
+        </Grid>
+
+        <Grid 
+            x:Name="gr_Songs"
+            Grid.Row="3"
+            Visibility="Visible">
+            <ListBox 
+                x:Name="lb_Songs"
+                Margin="30 0"
+                HorizontalAlignment="Stretch"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                DataContext="{Binding Database.Songs}"
+                ItemsSource="{Binding Songs}"
+                SelectedItem="{Binding SelectedSong, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <DockPanel Width="800">
-                            <StackPanel Orientation="Vertical"
-                                        VerticalAlignment="Center"
-                                        DockPanel.Dock="Left">
-                                <TextBlock Text="{Binding Title}"
-                                           FontSize="20"/>
-                                <TextBlock FontSize="16">
+                        <DockPanel Width="{Binding ElementName=lb_Songs, Path=ActualWidth}">
+                            <Ellipse
+                                Width="50"
+                                Height="50"
+                                Margin="0 0 30 0"
+                                DockPanel.Dock="Left">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Picture}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <StackPanel 
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                DockPanel.Dock="Left">
+                                <TextBlock 
+                                    Text="{Binding Title}"
+                                    FontSize="20"/>
+                                <TextBlock 
+                                    FontSize="16">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} - {1}">
                                             <Binding Path="Artist"/>
@@ -325,12 +517,15 @@
                                     </TextBlock.Text>
                                 </TextBlock>
                             </StackPanel>
-                            <Button x:Name="button_Actions"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="⋮"
-                                    Width="50"
-                                    Height="50"
-                                    DockPanel.Dock="Right"/>
+                            <Button 
+                                x:Name="button_Actions"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="⋮"
+                                Width="50"
+                                Height="50"
+                                DockPanel.Dock="Right"
+                                Command="{Binding DataContext.GoToSongViewCommand,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
                             <TextBlock/>
                         </DockPanel>
                     </DataTemplate>
@@ -338,79 +533,138 @@
             </ListBox>
         </Grid>
 
-        <Grid x:Name="gr_Artists"
-              Grid.Row="2"
-              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
-              Visibility="Collapsed">
-            <ListBox Grid.Row="3"
-                     Margin="30 0"
-                     HorizontalAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                     ItemsSource="{Binding Artists}">
+        <Grid 
+            x:Name="gr_Artists"
+            Grid.Row="3"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+            Visibility="Collapsed">
+            <ListBox
+                x:Name="lb_Artists"
+                Margin="30 0"
+                HorizontalAlignment="Stretch"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                DataContext="{Binding Database.Artists}"
+                ItemsSource="{Binding ArtistsCollection}"
+                SelectedItem="{Binding SelectedArtist}"
+                SelectedIndex="{Binding SelectedArtistIndex}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding Key}"
-                                       FontSize="20"/>
-                            <TextBlock Text="{Binding Count, StringFormat=\{0\} songs}"
-                                       FontSize="16"/>
-                        </StackPanel>
+                        <DockPanel
+                             Width="{Binding ElementName=lb_Artists, Path=ActualWidth}">
+                            <Ellipse
+                                Width="50"
+                                Height="50"
+                                Margin="0 0 30 0"
+                                DockPanel.Dock="Left">
+                                <Ellipse.Fill>
+                                    <ImageBrush 
+                                        Stretch="UniformToFill"
+                                        ImageSource="{Binding ImagePath}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <StackPanel 
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                                    Text="{Binding Title}"
+                                    FontSize="20"/>
+                                <TextBlock 
+                                    Text="{Binding Songs.Count, StringFormat=\{0\} songs}"
+                                    FontSize="16"/>
+                            </StackPanel>
+                            
+                            <TextBlock/>
+                        </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
 
-        <Grid x:Name="gr_Albums"
-              Grid.Row="2"
-              Visibility="Collapsed">
-            <ListBox Grid.Row="3"
-                     Margin="30 0"
-                     HorizontalAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                     ItemsSource="{Binding Albums}">
+        <Grid 
+            x:Name="gr_Albums"
+            Grid.Row="3"
+            Visibility="Collapsed">
+            <ListBox
+                x:Name="lb_Albums"
+                Grid.Row="3"
+                Margin="30 0"
+                HorizontalAlignment="Stretch"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                DataContext="{Binding Database.Albums}"
+                ItemsSource="{Binding AlbumsCollection}"
+                SelectedItem="{Binding SelectedAlbum}"
+                SelectedIndex="{Binding SelectedAlbumIndex}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding Key}"
-                                       FontSize="20"/>
-                            <TextBlock Text="{Binding Count, StringFormat=\{0\} songs}"
-                                       FontSize="16"/>
-                        </StackPanel>
+                        <DockPanel 
+                            Width="{Binding ElementName=lb_Albums, Path=ActualWidth}">
+                            <Rectangle
+                                Width="50"
+                                Height="50"
+                                Margin="0 0 30 0"
+                                DockPanel.Dock="Left">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding ImagePath}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <StackPanel 
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                DockPanel.Dock="Left">
+                                    <TextBlock 
+                                    Text="{Binding Title}"
+                                    FontSize="20"/>
+                                    <TextBlock 
+                                    Text="{Binding Songs.Count, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0\} songs}"
+                                    FontSize="16"/>
+                            </StackPanel>
+                            
+                            <TextBlock/>
+                        </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
 
-        <Grid x:Name="gr_Folders"
-              Grid.Row="2"
-              Visibility="Collapsed">
-            <ListBox Grid.Row="3"
-                     Margin="30 0"
-                     HorizontalAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                     ItemsSource="{Binding Folders}">
+        <Grid 
+            x:Name="gr_Folders"
+            Grid.Row="3"
+            Visibility="Collapsed">
+            <ListBox 
+                x:Name="lb_Folders"
+                Margin="30 0"
+                HorizontalAlignment="Stretch"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                DataContext="{Binding Database.Folders}"
+                ItemsSource="{Binding FoldersCollection}"
+                SelectedItem="{Binding SelectedFolder}"
+                SelectedIndex="{Binding SelectedFolderIndex}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding Key}"
-                                       FontSize="20"/>
-                            <TextBlock Text="{Binding Count, StringFormat=\{0\} songs}"
-                                       FontSize="16"/>
-                        </StackPanel>
+                        <DockPanel
+                            Width="{Binding ElementName=lb_Folders, Path=ActualWidth}">
+                            <StackPanel 
+                                Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left">
+                                <TextBlock 
+                                    Text="{Binding Title}"
+                                    FontSize="20"/>
+                                <TextBlock
+                                    Text="{Binding Songs.Count, StringFormat=\{0\} songs}"
+                                    FontSize="16"/>
+                            </StackPanel>
+                           
+                            <TextBlock/>
+                        </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-
     </Grid>
 </UserControl>

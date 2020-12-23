@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Music.Views
 {
     /// <summary>
-    /// Логика взаимодействия для SongList.xaml
+    /// Логика взаимодействия для SettingsView.xaml
     /// </summary>
-    public partial class SongList : UserControl
+    public partial class SettingsView : UserControl
     {
-        public SongList()
+        public SettingsView()
         {
             InitializeComponent();
         }
