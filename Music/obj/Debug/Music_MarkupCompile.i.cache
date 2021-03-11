@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\obj\Debug\
+D:\programming\music_player\Music\obj\Debug\
 Music
 none
 false
 DEBUG;TRACE
-C:\Users\maxim\OneDrive\Рабочий стол\Music\Music\App.xaml
+D:\programming\music_player\Music\App.xaml
 131494055420
 
-49-650607014
-20-1585384194
+491071889831
+20-1931837720
 Views\AlbumView.xaml;Views\AllSongsView.xaml;Views\ArtistView.xaml;Views\FavouritesView.xaml;Views\FolderView.xaml;Views\FullPlayerView.xaml;Views\MiniPlayerView.xaml;Views\MusicSecondView.xaml;Views\MusicView.xaml;Views\PlaylistsView.xaml;Views\PlaylistView.xaml;Views\SettingsView.xaml;Views\SongView.xaml;
 
-True
+False
 
